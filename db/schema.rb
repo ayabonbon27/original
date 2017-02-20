@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170215115459) do
+ActiveRecord::Schema.define(version: 20170220070611) do
+
+  create_table "todos", force: :cascade do |t|
+    t.integer  "user_id",                         null: false
+    t.string   "content",                         null: false
+    t.integer  "age"
+    t.string   "cost"
+    t.boolean  "completed",       default: false, null: false
+    t.datetime "completion_date"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "todos", ["user_id", "created_at"], name: "index_todos_on_user_id_and_created_at"
+  add_index "todos", ["user_id"], name: "index_todos_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -19,6 +33,8 @@ ActiveRecord::Schema.define(version: 20170215115459) do
     t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.text     "profile"
+    t.integer  "status",          limit: 1, default: 0, null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

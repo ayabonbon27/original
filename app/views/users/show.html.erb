@@ -1,4 +1,53 @@
-<h1>
-  <%= gravatar_for @user %>
-  <%= @user.name %>
-</h1>
+<div class="row">
+  <aside class="col-md-3">
+    <section class="user_info">
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.name %>
+      </h1>
+      <p><%= @user.profile %></p>
+      <% if @user.status == "open" %>
+      <p>夢・目標を公開</p>
+      <% elsif @user.status == "close" %>
+      <p>夢・目標を非公開</p>
+      <% end %>
+    </section>
+
+  </aside>
+  
+  
+  <div class="col-md-9">
+    <% if @user.status == "open" || current_user == @user%>
+    
+      <h3>夢・目標  (<%= @todos.count %>) </h3>
+      <% if @user.todos.any? %>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th class="col-md-1">年齢</th>
+            <th>夢・目標</th>
+            <th class="col-md-2">コスト（円）</th>
+            <th class="col-md-2">達成日</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @todos.each do |todo| %>
+          <tr>
+            <td><%= todo.age %></td>
+            <td><%= simple_format(todo.content) %></td>
+            <td><%= todo.cost %></td>
+            <td><%= todo.completion_date.strftime('%Y年%m月%d日') if todo.completed? && todo.completion_date?  %></td>
+            <% if todo.user == current_user %>
+            <td><%= link_to "編集", edit_todo_path(todo) ,class: "text-warning" %></td>
+            <td><%= link_to "削除", todo , method: :delete , data: { confirm: "You sure?" } , class: "text-danger" %></td>
+            <% end %>
+          </tr>
+          <% end %>
+        </tbody>
+      </table> 
+      <%= paginate @todos %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+

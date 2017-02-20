@@ -1,0 +1,38 @@
+<div class="row">
+  <aside class="col-md-3">
+    <section class="user_info">
+      <h1>
+        <%= gravatar_for @user %>
+        <%= link_to @user.name , @user %>
+      </h1>
+      <p><%= @user.profile %></p>
+    </section>
+
+  </aside>
+  
+  <div class="col-md-9">
+    <h3>編集</h3>
+    <%= form_for(@todo) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %> <!-- ここを追加 -->
+
+      <%= f.label :content , "内容（夢・目標）" %>
+      <%= f.text_area :content , rows: 5,  class: 'form-control' %>
+
+      <%= f.label :age , "目標達成年齢"%>
+      <%= f.text_field :age, class: 'form-control' %>
+      
+      <%= f.label :cost , "コスト（円）"%>
+      <%= f.text_field :cost, class: 'form-control' %>
+      
+      <label>未達成<%= f.radio_button :completed, false %></label>
+      <label>達成<%= f.radio_button :completed, true %></label><br>
+      
+      <%= f.label :completion_date , "達成日"%><br>
+      <%= f.date_select(:completion_date, {:use_month_numbers => true },class: "form-control bootstrap-date") %>
+
+      <%= f.submit "更新", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+  
+</div>
+
