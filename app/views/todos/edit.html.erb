@@ -21,8 +21,8 @@
       <%= f.label :age , "目標達成年齢"%>
       <%= f.text_field :age, class: 'form-control' %>
       
-      <%= f.label :cost , "コスト（円）"%>
-      <%= f.text_field :cost, class: 'form-control' %>
+      <%= f.label :cost , "目標達成に必要なこと"%>
+      <%= f.text_area :cost ,  rows: 3, class: 'form-control' %>
       
       <label>未達成<%= f.radio_button :completed, false %></label>
       <label>達成<%= f.radio_button :completed, true %></label><br>

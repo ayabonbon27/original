@@ -51,6 +51,6 @@ end
 
 gem 'kaminari'
 
-gem 'rails-erd', group: [:development, :test]
+#gem 'rails-erd', group: [:development, :test]
 
 gem 'validates_timeliness', '~> 4.0'

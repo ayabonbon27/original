@@ -4,7 +4,7 @@ class Todo < ActiveRecord::Base
   validates :user_id, presence: true
   validates :content,  presence: true, length: { maximum: 500 }
   validates :age, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 150 }
-  validates :cost, numericality: { only_integer: true }
+  validates :cost ,  presence: true, length: { maximum: 300 }
   validates :completed, inclusion: { in: [true, false] }
   validates_date :completion_date, on: :update
 end
